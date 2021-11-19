@@ -4,7 +4,11 @@
       <div class="message-title">Login</div>
       <div class="message-text">
         <input class="md-textfield" type="text" placeholder="Username" v-model="username">
-        <input class="md-textfield" type="password" placeholder="Password" v-model="password">
+        <input class="md-textfield" :type="inputType" placeholder="Password" v-model="password">
+      </div>
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="show_pass" @click="togglePassword">
+        <label class="custom-control-label" for="show_pass">show password</label>
       </div>
       <div class="buttons">
         <button class="md-button flat" type="button" @click="$close()">Cancel</button>
@@ -19,7 +23,8 @@
   export default {
     data: () => ({
       username: '',
-      password: ''
+      password: '',
+      inputType: 'password'
     }),
     methods: {
       submit () {
@@ -32,6 +37,9 @@
         } else {
           messageBox('❌ Please enter valid username and password')
         }
+      },
+      togglePassword () {
+        this.inputType = this.inputType === 'password' ? 'text' : 'password'
       }
     }
   }
@@ -51,4 +59,4 @@
   .confirm {
     padding-bottom: 16px;
   }
-</style>>
+</style>
