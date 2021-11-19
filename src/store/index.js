@@ -39,7 +39,8 @@ export default new Vuex.Store({
     // user-task-id features
     userTasks: {
       // url: uuid (is the structure for this)
-    }
+    },
+    loggedIn: false
   },
   getters: {
     geturl: function (state) {
@@ -80,6 +81,9 @@ export default new Vuex.Store({
         // delete if the taskid is invalid
         Vue.delete(state.userTasks, params.url)
       }
+    },
+    setLoggedIn (state) {
+      state.loggedIn = true
     }
   }
 })
