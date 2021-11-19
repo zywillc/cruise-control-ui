@@ -52,8 +52,11 @@
           <li class="nav-item" v-if='modules.review'>
             <router-link class="nav-link" :to='{"name": "page.review", params: { group: group, cluster: cluster } }'>Peer Reviews</router-link>
           </li>
-          <li class="nav-item" v-if='modules.admin_broker'>
+          <li class="nav-item" v-show='loggedIn' v-if='modules.admin_broker'>
             <router-link class="nav-link" :to='{"name": "page.admin_broker", params: { group: group, cluster: cluster } }'>&#9881; Kafka Cluster Administration</router-link>
+          </li>
+          <li class="nav-item" v-if='!loggedIn'>
+            <button class="btn btn-primary" @click="goLogin">Admin Login</button>
           </li>
         </ul>
       </div>
@@ -68,6 +71,7 @@
 
 <script>
 import Offline from '@/components/Offline'
+import { login } from '@/dialog'
 export default {
   name: 'Page',
   props: {
@@ -76,7 +80,17 @@ export default {
   },
   data () {
     return {
-      modules: this.$store.state.modules
+      modules: this.$store.state.modules,
+      loggedIn: this.$store.state.loggedIn
+    }
+  },
+  methods: {
+    async goLogin () {
+      let result = await login()
+      this.loggedIn = result ? result.loggedIn : false
+      if (this.loggedIn) {
+        this.$store.commit('setLoggedIn')
+      }
     }
   },
   computed: {
