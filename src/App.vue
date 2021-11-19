@@ -146,6 +146,6 @@ button, input {
   }
 
 .fade-enter, .fade-leave-active {
-    opacity: 0;
+    opacity: 1;
 }
 </style>
