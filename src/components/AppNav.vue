@@ -1,9 +1,11 @@
 <!-- Copyright 2017-2019 LinkedIn Corp. Licensed under the BSD 2-Clause License (the "License"). See License in the project root for license information. -->
 <template>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a href="#" target="_self" class="navbar-brand">
-        <img height=48 src="/static/cc-logo.png" alt="LinkedIn Kafka Cruise Control Frontend" />
-    </a>
+    <div id="logo">
+      <a href="#" target="_self" class="navbar-brand">
+          <img height=48 src="/static/cc-logo.png" alt="LinkedIn Kafka Cruise Control Frontend" />
+      </a>
+    </div>
     <router-link class="navbar-item" :to='{name: "summary"}'>Summary</router-link>
     <ul class="navbar-nav">
       <li class="nav-item dropdown" v-for="(groupm, forgroup) in groups" :key="forgroup">
@@ -119,3 +121,14 @@ export default {
   }
 }
 </script>
+
+<style lang="less" scoped>
+#logo :after{
+  content: url(/static/santahat.png);
+  display: block;
+  position: absolute;
+  top: -4px;
+  left: 9.5px;
+}
+
+</style>
